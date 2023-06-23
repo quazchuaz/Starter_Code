@@ -8,11 +8,12 @@ csv_path = os.path.join('..', 'Resources', 'budget_data.csv')
 #Read CSV file
 with open(csv_path, newline="") as csv_file:
     csvreader = csv.reader(csv_file, delimiter=',')
-#Skip Header Row
+
+#Skip header row and set first_row as a variable to be used further below.
     csv_header = next(csvreader)
     first_row = next(csvreader)
 
-# Define list variable to tally months and net profit, set base values to 0
+# Initialise variables. Set Months_count to 1 and Net_Profit to the first_row value as we will be skipping the first row of data when calculating changes.
     Months_count = 1
     Net_Profit = int(first_row[1])
     Profit_Change = 0
@@ -21,10 +22,14 @@ with open(csv_path, newline="") as csv_file:
     Min_Month = first_row[0]
     Max_Month = first_row [0]
     
-    # set prev_change equal to value in row 1 so that row 1 in loop outputs no change
+    # Set Prev_Change equal to value in row 1 so that row 1 in loop outputs no change.
     Prev_Change = int(first_row[1])
 
-    #append to expand the relevant lists with the relevant data - months in column 0 and rows in column 1
+    #Perform a loop to tally the months and net profit values, beginning at 1 and row 1 values respectively. 
+
+    #Set the current change as a variable that updates as we go down the list. This will enable determining the maximum and minimum values via the 'if' function later.
+
+    #Tallying the Current_Change values will allow us to arrive at the 'Profit_Change' for the period. the Prev_Change value updates as we go down the list of values.
     for row in csvreader:
         Months_count += 1
         Net_Profit += int(row[1])
@@ -38,15 +43,22 @@ with open(csv_path, newline="") as csv_file:
             Max_Change = Current_Change
             Max_Month = row[0]
 
-print(Months_count)
-print(Net_Profit)
-print(round(Profit_Change / (Months_count-1),2))
-print(f"{Min_Change} {Min_Month}")
-print(f"{Max_Change} {Max_Month}")
+#Print Outputs
+print("Financial Analysis")
+print("---------------------------")
+print(f"Total Months: {Months_count}")
+print(f"Total: ${Net_Profit}")
+Average_Change = (round(Profit_Change / (Months_count-1),2))
+print(f"Average Change ${Average_Change}")
+print(f"Greatest Increase in Profits: {Max_Month} $({Max_Change})")
+print(f"Greatest Decrease in Profits: {Min_Month} $({Min_Change})")
 
-
-
-
-
-
-
+#Write Text File
+with open ('Financialy_Analysis', 'w') as text:
+    text.write("Financial Analysis" +"\n")
+    text.write("---------------------------\n\n")
+    text.write(f"Total Months: {Months_count}" + "\n")
+    text.write(f"Total: ${Net_Profit}" +"\n")
+    text.write(f"Average Change ${Average_Change}" + "\n")
+    text.write(f"Greatest Increase in Profits: {Max_Month} $({Max_Change})" +"\n")
+    text.write(f"Greatest Decrease in Profits: {Min_Month} $({Min_Change})" + "\n")
