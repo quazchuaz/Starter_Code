@@ -14,6 +14,8 @@ with open(csv_path, newline="") as csv_file:
     first_row = next(csvreader)
 
 # Initialise variables. Set Months_count to 1 and Net_Profit to the first_row value as we will be skipping the first row of data when calculating changes.
+# Initialise max and min change to -infinity and infinity respectively so that any change will trigger the 'if' condition below.
+# The above is to avoid cases where all changes are either negative or positive (we initially set the values to 0 for min and max).
     Months_count = 1
     Net_Profit = int(first_row[1])
     Profit_Change = 0
