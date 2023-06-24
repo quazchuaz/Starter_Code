@@ -17,8 +17,8 @@ with open(csv_path, newline="") as csv_file:
     Months_count = 1
     Net_Profit = int(first_row[1])
     Profit_Change = 0
-    Max_Change = 0
-    Min_Change = 0
+    Max_Change = float('-inf')
+    Min_Change = float('inf')
     Min_Month = first_row[0]
     Max_Month = first_row [0]
     
