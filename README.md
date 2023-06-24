@@ -1,4 +1,4 @@
-#PyBank
+# PyBank
 Used a python scripot to analyse financial data containing Date and corresponding Profit/Loss information.
 
 I generated the following outputs:
@@ -8,7 +8,7 @@ Average Change: $-8311.11
 Greatest Increase in Profits: Aug-16 ($1862002)
 Greatest Decrease in Profits: Feb-14 ($-1825558)
 
-#PyPoll
+# PyPoll
 Used a python script to analyse election data and determine the election winner as well as some basic stastics concerning the candidates. 
 
 I generated the followig outputs:
