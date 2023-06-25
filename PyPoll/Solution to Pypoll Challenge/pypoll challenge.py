@@ -8,9 +8,7 @@ csv_path = os.path.join('..', 'Resources', 'election_data.csv')
 #Initialise Variables. Votes_Candidate and Percentage_Votes_Candidate set as dictionaries so that we can retrieve the relevant pairs later.
 Votes_count = 0
 Votes_Candidate = {}
-Percentage_Votes_Candidate = {}
-x = 0
-election_winner = ""
+Max_Votes = 0
 
 #Open and Access CSV file
 with open(csv_path, newline="") as csv_file:
@@ -32,13 +30,9 @@ with open(csv_path, newline="") as csv_file:
             Votes_Candidate[row[2]] += 1
         else:
             Votes_Candidate[row[2]] = 1
-
-        for candidate, votes in Votes_Candidate.items():
-            Percentage_Votes_Candidate[candidate] = round((votes / Votes_count) * 100, 3)
-
-            if votes > x:
-                x = votes
-                election_winner = candidate
+        if Votes_Candidate[row[2]] > Max_Votes:
+            Max_Votes = Votes_Candidate[row[2]]   
+            election_winner = row[2] 
 
 #Print outputs
 
@@ -47,7 +41,8 @@ print("-----------------------")
 print(f"Total Votes: {Votes_count}")
 print(f"-----------------------")
 for candidate, votes in Votes_Candidate.items():
-    print(f"{candidate}: {Percentage_Votes_Candidate[candidate]}% ({votes})")
+    Percentage_Votes = round((votes/Votes_count)*100, 3)
+    print(f"{candidate}: {Percentage_Votes}% ({votes})")
 print("-------------------------")
 print(f"Winner: {election_winner}")
 print(f"-------------------------")
@@ -60,7 +55,8 @@ with open("Election Results.txt", "w") as text:
     text.write(f"Total Votes: {Votes_count}\n")
     text.write(f"-----------------------\n")
     for candidate, votes in Votes_Candidate.items():
-        text.write(f"{candidate}: {Percentage_Votes_Candidate[candidate]}% ({votes})\n")
+        Percentage_Votes = round((votes/Votes_count)*100, 3)
+        text.write(f"{candidate}: {Percentage_Votes}% ({votes})\n")
     text.write("-------------------------\n")
     text.write(f"Winner: {election_winner}\n")
     text.write(f"-------------------------\n")
