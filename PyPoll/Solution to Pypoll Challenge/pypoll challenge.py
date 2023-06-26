@@ -19,9 +19,7 @@ with open(csv_path, newline="") as csv_file:
 
 #Nest an 'if' function to tally the Votes per Candidate. Each new candidate resets the counter to 1.
 
-#Add a second nested 'for' loop to get the percentage of total votes per candidate, using the previously calculated 'Votes_count'.
-
-#Finally, set the last 'if' function to determine who has the most votes.
+#Set a Max_Votes variables that updates to reflect the highest value.
 
     for row in csvreader:
         Votes_count += 1
@@ -34,7 +32,7 @@ with open(csv_path, newline="") as csv_file:
             Max_Votes = Votes_Candidate[row[2]]   
             election_winner = row[2] 
 
-#Print outputs
+#Print outputs, including percentage of votes per candidate
 
 print("Election Results")
 print("-----------------------")
